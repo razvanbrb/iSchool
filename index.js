@@ -1,3 +1,6 @@
+// this is the main entry point for your full app
+// it serves your frontend & provides access to your API
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -8,7 +11,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/static', express.static(__dirname + '/client/build/static'))
+app.use('/', express.static(__dirname + '/client/build/'))
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/client/build/index.html');
