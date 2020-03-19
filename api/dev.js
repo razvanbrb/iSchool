@@ -4,7 +4,7 @@ const express = require('express');
 const devServer = express();
 const api = require('./index.js');
 
-app.use((req, res, next) => {
+devServer.use((req, res, next) => {
   console.log(req.method + ': ' + req.path);
   next();
 });
