@@ -3,10 +3,14 @@
 //  server infrastructure will go in the main index.js
 
 const express = require('express');
-const router = express.Router();
+const app = express();
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send({ wow: 'it works' });
 });
 
-module.exports = router;
+app.get('/test', async (req, res) => {
+  res.json({message: 'pass!'})
+})
+
+module.exports = app;
