@@ -16,5 +16,5 @@ devServer.get('/', (req, res) => {
 });
 
 
-const port = process.env.PORT || 5000;
+const port = 5000;
 devServer.listen(port, () => console.log(`listening at http://localhost:${port}`));
