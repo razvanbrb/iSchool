@@ -4,8 +4,8 @@
   "scripts": {
     "dev-api": "nodemon dev.js",
     "start": "node server.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --collectCoverage=true",
+    "test:watch": "jest --watch --collectCoverage=true"
   },
   "license": "MIT",
   "dependencies": {

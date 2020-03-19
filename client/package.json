@@ -13,8 +13,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:watch": "react-scripts test --watch",
+    "test": "react-scripts test  --collectCoverage=true",
+    "test:watch": "react-scripts test --watch  --collectCoverage=true",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

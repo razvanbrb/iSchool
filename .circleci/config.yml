@@ -40,6 +40,9 @@ jobs:
           command: |
             cd api
             npm run test
+      - store_artifacts:
+                path: coverage
+
 
   test-frontend:
     docker:
