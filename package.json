@@ -5,8 +5,6 @@
     "dev-api": "nodemon api/dev.js",
     "dev-client": "cd client && npm run start",
     "start": "node index.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "license": "MIT",
@@ -16,8 +14,6 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "jest": "^25.1.0",
-    "nodemon": "^2.0.2",
-    "supertest": "^4.0.2"
+    "nodemon": "^2.0.2"
   }
 }

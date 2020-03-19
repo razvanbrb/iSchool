@@ -6,18 +6,70 @@ jobs:
     steps:
       - checkout
       - restore_cache: # special step to restore the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-backend-cache-{{ checksum "package.json" }}
       - run:
-          name: Setup Dependencies
-          command: npm install
+          name: Setup backend Dependencies
+          command: |
+            cd api
+            npm install
       - save_cache: # special step to save the dependency cache
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-backend-cache-{{ checksum "package.json" }}
           paths:
-            - node_modules
+            - api/node_modules
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-frontend-cache-{{ checksum "package.json" }}
+      - run:
+          name: Setup frontend Dependencies
+          command: |
+            cd client
+            npm install
+      - save_cache: # special step to save the dependency cache
+          key: dependency-frontend-cache-{{ checksum "package.json" }}
+          paths:
+            - client/node_modules
+
+  test-backend:
+    docker:
+      - image: 'circleci/node:current'
+    steps:
+      - checkout
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-backend-cache-{{ checksum "package.json" }}
       - run:
           name: Run back-end tests
           command: |
+            cd api
             npm run test
+
+  test-frontend:
+    docker:
+      - image: 'circleci/node:current'
+    steps:
+      - checkout
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-frontend-cache-{{ checksum "package.json" }}
+      - run:
+          name: Run frontend tests
+          command: |
+            cd client
+            npm run test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test-backend:
+          requires:
+            - build
+      - test-frontend:
+          requires:
+            - build
+#            filters:
+#              branches:
+#                only: master
+
+
 # version: 2
 # jobs:
 #   build:
