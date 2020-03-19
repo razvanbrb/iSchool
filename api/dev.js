@@ -2,7 +2,7 @@
 
 const express = require('express');
 const devServer = express();
-const api = require('./index.js');
+const api = require('./server.js');
 
 devServer.use((req, res, next) => {
   console.log(req.method + ': ' + req.path);

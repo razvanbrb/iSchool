@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <div>A nice app!</div>
           <p>
             {this.state.wow}
           </p>

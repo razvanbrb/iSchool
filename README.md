@@ -21,9 +21,9 @@ deploymenting/
 
 The main `index.js` in this directory is for deployment. It provides access to your api behind `/api` and statically serves the client from `/client/build`.  You can copy-paste this file directly, there should be need to modify it for your project.
 
-### Testing before Deploying
+### Running locally before Deploying
 
-To locally test the deployed version of your app run these commands:
+To locally run the deployed version of your app run these commands:
 
 * `npm run heroku-postbuild`
 * `npm run start`
@@ -45,5 +45,26 @@ To develop your app, run both the client and api in separate console tabs:
 * `npm run dev-api`
 * `npm run dev-client`
 
+## Testing
+To locally execute your tests, run the following commands
+
+### Test the frontend:
+```bash
+cd client
+npm install
+npm run test:watch
+```
+
+### Test the backend:
+```bash
+cd api
+npm install
+npm run test:watch
+```
+
+### Using CircleCI for continous integration
+If you have connected your github repo to CircleCI, tests are automatically executed each time that you push to github.
+
+To check the status of the pipelines, visit: `https://circleci.com/dashboard`
 
 
