@@ -2,6 +2,7 @@
   "name": "cooool",
   "version": "1.0.0",
   "scripts": {
+    "dev": "concurrently \"npm run dev-api\" \"npm run dev-client\"",
     "dev-api": "nodemon api/dev.js",
     "dev-client": "cd client && npm run start",
     "start": "node index.js",
@@ -14,6 +15,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }
 }
