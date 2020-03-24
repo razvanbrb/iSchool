@@ -12,7 +12,7 @@ devServer.use((req, res, next) => {
 devServer.use('/api', api);
 
 devServer.get('/', (req, res) => {
-  res.send('react frontend');
+  res.send('frontend');
 });
 
 
