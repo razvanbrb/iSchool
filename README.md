@@ -107,6 +107,13 @@ After creating an account and setting up the Heroku CLI, you can deploy your pro
 
 It's also possible to configure your Heroku deployment to build from the `master` branch of your github repository each time it is changed.
 
+```
+$ heroku create hyf-group6-languageplatform.herokuapp.com   # Create the app
+$ heroku git:remote -a hyf-group6-languageplatform.herokuapp.com  # Set `heroku` remote
+$ heroku buildpacks:set heroku/nodejs  # Set default language
+$ git push heroku infra/setup-heroku:master     # if 'infra/setup-heroku` is the name of local branch
+```
+
 [TOP](#organized-for-deployment)
 
 ---
