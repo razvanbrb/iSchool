@@ -14,7 +14,7 @@ A model of how you can set up your project for development, testing & deployment
 * [Deployment](#deployment)
   * [Mock](#mock)
   * [Manual](#manual)
-  * [Automated](#continuous)
+  * [Automated](#automated)
 * [Testing](#testing)
   * [Frontend](#Frontend)
   * [Backend](#backend)
