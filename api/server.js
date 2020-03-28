@@ -10,6 +10,9 @@ app.get('/', (req, res) => {
   res.send({ wow: 'it works' });
 });
 
+/**
+* Just a simple test endpoint to demo how to test with Jest
+**/
 app.get('/test', async (req, res) => {
   res.json({ message: 'pass!' })
 })
