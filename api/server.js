@@ -1,20 +1,23 @@
-// define your main API router here
-//  just require and use your routes and logic here
-//  server infrastructure will go in the main index.js
-
 const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const mongoose = require('./db/mongoose.js')
+
 const app = express();
 
+const secret = 'mysecretsshhh';
 
-app.get('/', (req, res) => {
-  res.send({ wow: 'it works' });
-});
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
 
-/**
-* Just a simple test endpoint to demo how to test with Jest
-**/
-app.get('/test', async (req, res) => {
-  res.json({ message: 'pass!' })
-})
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.use('/', require('./routes/home.js'));
+app.use('/', require('./routes/login.js'));
+app.use('/', require('./routes/test.js'));
 
 module.exports = app;
