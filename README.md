@@ -25,17 +25,26 @@ A model of how you can set up your project for development, testing & deployment
 
 ## Directory Structure
 
-```
+
+``
 .
 ├── .circleci/
 |   └── config.yml
 |
 ├── api/
-|   ├── __test__/
-|   |   └── example.spec.js
-|   ├── server.js
+|   ├── db
+|   │   └── mongoose.js
 |   ├── dev.js
-|   └── package.json
+|   ├── middleware.js
+|   ├── models
+|   │   └── User.js
+|   ├── routes
+|   │   ├── home.js
+|   │   ├── login.js
+|   │   └── test.js
+|   ├── server.js
+|   └── __test__
+|       └── example.spec.js`
 |
 ├── client/
 │   ├── build
