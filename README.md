@@ -26,7 +26,7 @@ A model of how you can set up your project for development, testing & deployment
 ## Directory Structure
 
 
-``
+```
 .
 ├── .circleci/
 |   └── config.yml
