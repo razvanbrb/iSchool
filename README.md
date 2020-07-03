@@ -1,7 +1,5 @@
 # Organized for Deployment
 
-> [live demo](https://polar-cliffs-55873.herokuapp.com/)
-
 A model of how you can set up your project for development, testing & deployment.
 
 ### Contents
@@ -33,7 +31,7 @@ A model of how you can set up your project for development, testing & deployment
 |
 ├── api/
 |   ├── db
-|   │   └── mongoose.js
+|   │   └── README.md
 |   ├── dev.js
 |   ├── middleware.js
 |   ├── models
