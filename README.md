@@ -169,6 +169,14 @@ npm install
 npm run test:watch
 ```
 
+### Continuous integration
+
+Test run on each commit on the master branch using [Github actions](https://docs.github.com/en/free-pro-team@latest/actions). The configuration can be found in `.github/workflows/node.js.yml`.
+
+[TOP](#organized-for-deployment)
+
+---
+
 ## Helpful Links
 
 * [Heroku devhints](https://devhints.io/heroku)
@@ -177,5 +185,4 @@ npm run test:watch
 
 [TOP](#organized-for-deployment)
 
----
 ---
