@@ -129,21 +129,28 @@ npm run heroku-postbuild
 npm run start
 ```
 
-### Manual
+### Getting started
 
-At first you can deploy your project from you local machine.
+Create a [Heroku account](https://signup.heroku.com/) and install the [Heroku cli](https://devcenter.heroku.com/articles/heroku-cli).
+Verify the installation with
+```bash
+heroku status
+```
 
-After creating an account and setting up the Heroku CLI, you can deploy your project by running `git push heroku master` from the top level of your project.
-
-### Automated
-
-It's also possible to configure your Heroku deployment to build from the `master` branch of your github repository each time it is changed.
+Initialize Heroku inside the project folder by using:
 
 ```bash
-heroku create hyf-group6-languageplatform.herokuapp.com   # Create the app
-heroku git:remote -a hyf-group6-languageplatform.herokuapp.com  # Set `heroku` remote
-heroku buildpacks:set heroku/nodejs  # Set default language
-git push heroku infra/setup-heroku:master     # if 'infra/setup-heroku` is the name of local branch
+heroku create
+```
+
+> Note it is likely you want to create the app with some options, a useful for the project.
+
+### Manual
+
+You can deploy your project from your local machine by pushing to the Heroku master repository.
+
+```
+git push heroku master
 ```
 
 [TOP](#organized-for-deployment)
