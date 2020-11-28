@@ -26,10 +26,10 @@ jobs:
       working-directory: client
     - name: Install Backend & Project dependencies
       run: npm ci
-    - name: Start test server
-      run: npm run test:watch
     - name: Run tests
-      run: npm test
+      run: |
+        npm run test:watch &
+        npm run test
       env:
         DB_HOST: localhost
         DB_NAME: foo
