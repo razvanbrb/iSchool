@@ -1,6 +1,6 @@
+const { cryptPassword } = require('../utils/encryption');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 const sequelize = require('../db/db.js');
-const bcrypt = require('bcrypt');
 
 class User extends Model {
     constructor({ email, password }) {
@@ -32,13 +32,5 @@ User.beforeCreate((user, options) => {
         });
 });
 
-const cryptPassword = (password) => {
-    return new Promise(function (resolve, reject) {
-        bcrypt.hash(password, 10, function (err, hash) {
-            if (err) return reject(err);
-            return resolve(hash);
-        });
-    });
-}
 
 module.exports = User;

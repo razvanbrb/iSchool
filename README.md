@@ -4,8 +4,10 @@ A model of how you can set up your project for development, testing & deployment
 
 ### Contents
 
-* [Directory Structure](#directory-structure)
+* [General](#general)
+  * [Configuration](#configuration)
 * [Development](#development)
+  * [Getting started](#getting-started)
   * [API](#api)
   * [Client](#client)
   * [Full App](#full-app)
@@ -16,66 +18,85 @@ A model of how you can set up your project for development, testing & deployment
 * [Testing](#testing)
   * [Frontend](#Frontend)
   * [Backend](#backend)
-  * [Continuous Integration](#continuous-integration)
 * [Helpful Links](#helpful-links)
 
----
+## General
 
-## Directory Structure
+### Configuration
+
+This application reads the secrets from a `.env` [file](https://en.wikipedia.org/wiki/Environment_variable) at the root of this project. A secret is something you don't want to commit to a public repository. The password for your database for instance. A node package [dotenv](https://github.com/motdotla/dotenv) is used to read and parse this file and provides an interface we can use.
+
+Create a file called `.env` to the root. 
 
 
 ```
-.
-├── .circleci/
-|   └── config.yml
-|
-├── api/
-|   ├── db
-|   │   └── README.md
-|   ├── dev.js
-|   ├── middleware.js
-|   ├── models
-|   │   └── User.js
-|   ├── routes
-|   │   ├── home.js
-|   │   ├── login.js
-|   │   └── test.js
-|   ├── server.js
-|   └── __test__
-|       └── example.spec.js`
-|
-├── client/
-│   ├── build
-│   ├── coverage
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── public
-│   ├── README.md
-│   └── src
-|
-├── index.js
-└── package.json
+DB_HOST=YOUR_IP_OR_DOMAIN
+DB_NAME=YOUR_DATABASE_NAME
+DB_USER=YOUR_DATABASE_USER
+DB_PASSWORD=YOUR_DATABASE_USER_PASSWORD
+JWT_SECRET=A_JWT_SECRET_A_RANDOM_STRING_OF_CHARACTERS
 ```
 
-[TOP](#organized-for-deployment)
+`DB_HOST` A domain or IP the host of your database.
 
----
+`DB_NAME` The name of your database. The application will connect to this database.
+
+`DB_USER` User used to authenticate to the database. Typically a user called `root` is created in MySQL. Although it is not recommend to use that user in production.
+
+`JWT_SECRET` Within the app a standard called [JWT](https://jwt.io/introduction/) is used to manage authorization. This requires a random complicated password like string to sign tokens.
 
 ## Development
 
-### API
+### Getting started
+
+Make sure you configure your secrets in line with your development environment. See the [configuration section](#configuration).
+
+Install backend dependencies.
+
+```
+npm install
+```
+
+Install frontend dependencies
+
+```
+yarn install
+```
+
+#### Database
+
+Your application will need to persist data. The interaction with the database is abstracted by an [ORM (Object role modelling)](https://nl.wikipedia.org/wiki/Object_role_modeling) called [Sequalize](https://sequelize.org/) . 
+
+Make sure you configure your secrets in line with your development environment. See the [configuration section](#configuration).
+You can create the database and tables by running the `sync.js` script.
+
+```
+node api/scripts/sync.js
+```
+
+Optionally you can seed the tables with some test data by running:
+
+```
+node api/scripts/seed.js
+```
+
+### API (Backend)
 
 To develop just the API separately from the frontend run:
 
-* `npm run dev-api`
+```bash
+npm run dev-api
+```
 
 This will run your api as though it were part of the full live project.  All routes will be have `api/` appended before them and a get request to `/` will return the string `"frontend"`
 
-### Client
+### Client (Frontend)
 
 To develop just the frontend separately from the API run:
 
-* `npm run dev-client`
+```bash
+npm run dev-client
+```
 
 > DISCLAIMER!  this will only work if you have set up a mock-api
 
@@ -83,9 +104,11 @@ To develop just the frontend separately from the API run:
 
 You can also develop the frontend and API in parallel by running:
 
-* `npm run dev`
+```bash
+npm run dev
+```
 
-This script will run the frontend and backend on separate ports, the backend on `localhost:5000` with _nodemon_. The frontend will be run using create-react-app's `start` script, redirecting all API calls to `localhost:5000`.
+This script will run the frontend and backend on separate ports, the backend on `localhost:5000` with [nodemon](https://nodemon.io/). The frontend will be run using [create-react-app's](https://github.com/facebook/create-react-app) `start` script, redirecting all API calls to `localhost:5000`.
 
 [TOP](#organized-for-deployment)
 
@@ -101,8 +124,10 @@ In order for your project to run on Heroku, the main `package.json` needs a `sta
 
 To mock deployment on your local machine you can run these commands.  The app will build and run the same as it will on Heroku to help you troubleshoot your deployed project locally.
 
-* `npm run heroku-postbuild`
-* `npm run start`
+```bash
+npm run heroku-postbuild
+npm run start
+```
 
 ### Manual
 
@@ -110,15 +135,15 @@ At first you can deploy your project from you local machine.
 
 After creating an account and setting up the Heroku CLI, you can deploy your project by running `git push heroku master` from the top level of your project.
 
-## Automated
+### Automated
 
 It's also possible to configure your Heroku deployment to build from the `master` branch of your github repository each time it is changed.
 
-```
-$ heroku create hyf-group6-languageplatform.herokuapp.com   # Create the app
-$ heroku git:remote -a hyf-group6-languageplatform.herokuapp.com  # Set `heroku` remote
-$ heroku buildpacks:set heroku/nodejs  # Set default language
-$ git push heroku infra/setup-heroku:master     # if 'infra/setup-heroku` is the name of local branch
+```bash
+heroku create hyf-group6-languageplatform.herokuapp.com   # Create the app
+heroku git:remote -a hyf-group6-languageplatform.herokuapp.com  # Set `heroku` remote
+heroku buildpacks:set heroku/nodejs  # Set default language
+git push heroku infra/setup-heroku:master     # if 'infra/setup-heroku` is the name of local branch
 ```
 
 [TOP](#organized-for-deployment)
@@ -144,11 +169,9 @@ npm install
 npm run test:watch
 ```
 
-### Continuous Integration
+### Continuous integration
 
-If you have connected your github repo to CircleCI, tests are automatically executed each time that you push to github.
-
-To check the status of the pipelines, visit: `https://circleci.com/dashboard`
+Test run on each commit on the master branch using [Github actions](https://docs.github.com/en/free-pro-team@latest/actions). The configuration can be found in `.github/workflows/node.js.yml`.
 
 [TOP](#organized-for-deployment)
 
@@ -162,5 +185,4 @@ To check the status of the pipelines, visit: `https://circleci.com/dashboard`
 
 [TOP](#organized-for-deployment)
 
----
 ---

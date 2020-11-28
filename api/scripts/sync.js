@@ -1,6 +1,11 @@
 const sequelize = require('../db/db.js');
-
-// Defines the models on sequelize by reference
 const User = require('../models/User.js');
 
-sequelize.sync({ force: true });
+const createTables = async () => {
+  sequelize.sync({ force: true });
+}
+
+createTables()
+  .then(() => {
+    process.exit();
+  });
