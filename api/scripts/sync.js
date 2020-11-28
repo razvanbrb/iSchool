@@ -8,4 +8,4 @@ const createTables = async () => {
 createTables()
   .then(() => {
     process.exit();
-  })
+  });
