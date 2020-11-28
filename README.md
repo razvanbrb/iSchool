@@ -18,7 +18,6 @@ A model of how you can set up your project for development, testing & deployment
 * [Testing](#testing)
   * [Frontend](#Frontend)
   * [Backend](#backend)
-  * [Continuous Integration](#continuous-integration)
 * [Helpful Links](#helpful-links)
 
 ## General
@@ -169,16 +168,6 @@ cd api
 npm install
 npm run test:watch
 ```
-
-### Continuous Integration
-
-If you have connected your github repo to CircleCI, tests are automatically executed each time that you push to github.
-
-To check the status of the pipelines, visit: `https://circleci.com/dashboard`
-
-[TOP](#organized-for-deployment)
-
----
 
 ## Helpful Links
 
