@@ -51,13 +51,13 @@ const SchoolSchema = new Schema({
     },
  
     areas:{
-        type: String,
+        type: [String],
          enum : ['General','Technical','Vocational','Art Secondary Education' ],
         required:[true, 'Areas is required']
     },
     network:{
         type: String,
-         enum : ['Community education','Official subsidized education','Free subsidized education','Private schools' ],
+         enum : ['GO Network','Catholic Network','Municipality Schools','Private schools' ],
         required:[true, 'Network is required']
     },
     languageClasses: {
