@@ -4,6 +4,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const User = require('./models/User');
+const School = require('./models/School');
 
 const api = require('./api/server');
 
@@ -11,10 +14,17 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Connect Mongo DB
+mongoose.connect(process.env.MONGOBD_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true, useFindAndModify: false}, ()=> console.log('connected to database'));
+mongoose.Promise = global.Promise;
+
+
 app.use((req, res, next) => {
   console.log(req.method + ': ' + req.path);
   next();
 });
+
+
 
 app.use('/', express.static(__dirname + '/client/build/'))
 
