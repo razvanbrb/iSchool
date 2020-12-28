@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const GeoSchema = require('./Geo')
+
+export const GeoSchema = new Schema({
+    type:{
+        type:String,
+        default:"Point"
+    },
+    coordinates: {
+        type: [Number],
+        // index: '2dsphere'
+    }
+})
 
 const CommentsSchema = new Schema( {
     body:{
@@ -51,13 +61,13 @@ const SchoolSchema = new Schema({
     },
  
     areas:{
-        type: [String],
+        type: String,
          enum : ['General','Technical','Vocational','Art Secondary Education' ],
         required:[true, 'Areas is required']
     },
     network:{
         type: String,
-         enum : ['GO Network','Catholic Network','Municipality Schools','Private schools' ],
+         enum : ['Community education','Official subsidized education','Free subsidized education','Private schools' ],
         required:[true, 'Network is required']
     },
     languageClasses: {
@@ -74,21 +84,6 @@ const SchoolSchema = new Schema({
        type: String,
        required:[true, 'Website is required']
     },
-
-    address:{
-        city:{
-            type:String,
-            required: true
-        },
-        street:{
-            type:String,
-            required: true
-        },
-        num:{
-            type:String,
-            required: true
-        }
-    },
  
     date: {
         type: Date,
@@ -97,7 +92,7 @@ const SchoolSchema = new Schema({
 
 })
 
-
+GeoSchema.index({coordinates: '2dsphere'});
 
 const School = mongoose.model('School',SchoolSchema, 'schools');
 
