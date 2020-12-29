@@ -35,33 +35,6 @@ app.get('/', (req, res) => {
 
 app.use('/api', api);
 
-// get all schools
-app.get('/schools', (req, res, next)=>{
-  School.find({}).then((school)=>{
-    res.send(school)
-  }).catch(next);
-})
-
-
-// get the closest school
-app.get('/closestchools', (req, res, next)=>{
-  const longitude = parseFloat(req.query.lng);
-  const latitude = parseFloat(req.query.lat);
-  School.find({
-    location: {
-      $near : {
-        $maxDistance: 1000,
-        $geometry : {
-          type : 'Point',
-          coordinates:[longitude,latitude]
-        }
-      }
-    }
-  }).find((error,results)=>{
-    if (error) console.log(error);
-    res.send(results)
-  });
-})
 
 const port = process.env.PORT || 9000;
 app.listen(port, () => console.log(`listening at http://localhost:${port}`));
