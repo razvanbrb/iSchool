@@ -85,19 +85,22 @@ const SchoolSchema = new Schema({
        required:[true, 'Website is required']
     },
 
-    address:{
-        city:{
-            type:String,
-            required: true
+    adress: {
+        postcode: {
+            type: Number,
+            required: [true, 'Post code is required']
         },
-        street:{
-            type:String,
-            required: true
+
+        city: { type: String, default: 'Gent' },
+        street: {
+            type: String,
+            required: [true, 'Street is required']
         },
-        num:{
-            type:String,
-            required: true
-        }
+        building: {
+            type: String,
+            required: [true, 'Building No is required']
+        },
+
     },
  
     date: {
