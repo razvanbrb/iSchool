@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const GeoSchema = require('./Geo')
+
 
 // Create user models and Schemas
 const UserSchema = new Schema({
@@ -32,7 +32,17 @@ const UserSchema = new Schema({
         required:false
     },
     
-   geometry: GeoSchema,
+    location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
 
     lists:{
         type: [],
@@ -46,6 +56,7 @@ const UserSchema = new Schema({
 
 })
 
+UserSchema.index({location: '2dsphere'});
 const User = mongoose.model('user', UserSchema);
 
 module.exports = User;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const GeoSchema = require('./Geo')
+
 
 const CommentsSchema = new Schema( {
     body:{
@@ -27,7 +27,17 @@ const SchoolSchema = new Schema({
         required:[true, 'Name field is required']
     },
  
-    geometry: GeoSchema,
+    location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    },
  
     phone: {
         type: String,
@@ -97,8 +107,8 @@ const SchoolSchema = new Schema({
 
 })
 
-
-
+SchoolSchema.index({location: '2dsphere'});
+SchoolSchema.index({ adress: 1, name: 1 }, { unique: true });
 const School = mongoose.model('School',SchoolSchema, 'schools');
 
 module.exports = School;
