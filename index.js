@@ -42,6 +42,12 @@ app.get('/schools', (req, res, next)=>{
   }).catch(next);
 })
 
+//add school
+app.post('/schools', (req, res, next)=>{
+  School.create(req.body).then((school)=>{
+    res.send(school)
+  }).catch(next);
+})
 
 // get the closest school
 app.get('/closestchools', (req, res, next)=>{
