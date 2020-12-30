@@ -25,8 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use('/', express.static(__dirname + '/client/build/'))
 
 app.get('/', (req, res) => {
@@ -35,6 +33,39 @@ app.get('/', (req, res) => {
 
 app.use('/api', api);
 
+// get all schools
+app.get('/schools', (req, res, next)=>{
+  School.find({}).then((school)=>{
+    res.send(school)
+  }).catch(next);
+})
+
+//add school
+app.post('/schools', (req, res, next)=>{
+  School.create(req.body).then((school)=>{
+    res.send(school)
+  }).catch(next);
+})
+
+// get the closest school
+app.get('/closestschools', (req, res, next)=>{
+  const longitude = parseFloat(req.query.lng);
+  const latitude = parseFloat(req.query.lat);
+  School.find({
+    location: {
+      $near : {
+        $maxDistance: 1000,
+        $geometry : {
+          type : 'Point',
+          coordinates:[longitude,latitude]
+        }
+      }
+    }
+  }).find((error,results)=>{
+    if (error) console.log(error);
+    res.send(results)
+  });
+})
 
 const port = process.env.PORT || 9000;
 app.listen(port, () => console.log(`listening at http://localhost:${port}`));
