@@ -25,8 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use('/', express.static(__dirname + '/client/build/'))
 
 app.get('/', (req, res) => {
@@ -68,9 +66,6 @@ app.get('/closestschools', (req, res, next)=>{
     res.send(results)
   });
 })
-
-
-
 
 const port = process.env.PORT || 9000;
 app.listen(port, () => console.log(`listening at http://localhost:${port}`));
