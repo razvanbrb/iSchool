@@ -50,7 +50,7 @@ app.post('/schools', (req, res, next)=>{
 })
 
 // get the closest school
-app.get('/closestchools', (req, res, next)=>{
+app.get('/closestschools', (req, res, next)=>{
   const longitude = parseFloat(req.query.lng);
   const latitude = parseFloat(req.query.lat);
   School.find({
