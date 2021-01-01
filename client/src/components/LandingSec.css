@@ -1,0 +1,71 @@
+.sec-container {
+    /* background: url('/images/img-home.jpg') center center/cover no-repeat; */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    object-fit: contain;
+}
+
+.sec-container>h3 {
+    color: black;
+    font-size: 50px;
+    margin-top: -200px;
+    margin-left: 20%;
+}
+
+.text {
+    margin-left: 30%;
+}
+
+.sec-btns {
+    margin-top: 32px;
+    margin-left: 15%;
+}
+
+.sec-btns .btn {
+    margin-bottom: 25px;
+    background-color: red;
+    border: 2px solid red;
+    border-radius: 5px;
+    margin-left: 30%;
+}
+
+.sec-btns .btn:hover {
+    background-color: white;
+    color: red;
+}
+
+@media screen and (max-width: 960px) {
+    .sec-container>h3 {
+        font-size: 40px;
+        margin-top: -200px;
+    }
+    .sec-btns .btn {
+        margin-left: 10%;
+    }
+    .text {
+        margin-left: 5%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sec-container>h3 {
+        font-size: 20px;
+        margin-top: -200px;
+    }
+    .sec-btns .btn {
+        margin-left: 10%;
+    }
+    .text {
+        margin-left: 5%;
+    }
+    .btn-mobile {
+        display: block;
+        text-decoration: none;
+    }
+    .btn {
+        width: 60%;
+    }
+}
